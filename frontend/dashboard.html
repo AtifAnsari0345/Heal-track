@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Heal Track</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <div class="logo">
+        <i class="fas fa-heartbeat logo-icon"></i>
+        <span>Heal Track</span>
+      </div>
+      <div class="user-area">
+        <span class="welcome-text">Welcome, <span id="user-name">Atif</span></span>
+        <a href="profile.html" class="profile-btn"><i class="fas fa-user"></i> Profile</a>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Title Section -->
+      <div class="hero-section">
+        <div class="hero-content">
+          <h1>Your Health Journey Starts Here</h1>
+          <p>Manage your healthcare needs with ease and convenience</p>
+          <div class="hero-decoration">
+            <i class="fas fa-heartbeat"></i>
+            <i class="fas fa-stethoscope"></i>
+            <i class="fas fa-user-md"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Services Section -->
+      <section class="services-section">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-ambulance"></i></div>
+            <h3>Emergency Services</h3>
+            <p>Quick access to emergency medical services and nearby facilities</p>
+            <button class="service-btn" id="emergency-btn">Call Now</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-user-md"></i></div>
+            <h3>Book Doctor Appointment</h3>
+            <p>Schedule appointments with specialists based on your needs</p>
+            <button class="service-btn" id="appointment-btn">Book Now</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-pills"></i></div>
+            <h3>Buy Medicines Online</h3>
+            <p>Order prescription and over-the-counter medicines online</p>
+            <button class="service-btn" id="medicine-btn">Shop Now</button>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-home"></i></div>
+            <h3>Home Doctor Visit</h3>
+            <p>Request a qualified doctor to visit you at your home</p>
+            <button class="service-btn" id="home-visit-btn">Request Visit</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Activity Section -->
+      <section class="activity-section">
+        <h2 class="section-title">Recent Activity</h2>
+        <button class="clear-activities-btn" id="clearAllBtn" style="display: none;">
+          <i class="fas fa-trash-alt"></i> Clear All
+        </button>
+        <div class="activity-list" id="activity-list">
+          <!-- Activity items will be populated by JavaScript -->
+          <ul class="list-group" id="activity-items"></ul>
+          <div class="empty-state" id="empty-activity">
+            <i class="fas fa-history"></i>
+            <p>No activities yet. Your recent actions will appear here.</p>
+          </div>
+          <div id="activitySpinner" class="text-center mt-3" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading activities...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <i class="fas fa-heartbeat"></i>
+          <span>Heal Track</span>
+        </div>
+        <div class="footer-contact">
+          <h3>Contact Us</h3>
+          <a href="mailto:2022.mohammed.ansari@ves.ac.in" class="email-link">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2025 Heal Track. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modals -->
+  <!-- Emergency Modal with Hospital Finder -->
+  <div class="modal" id="emergency-modal">
+    <div class="modal-content emergency-modal-content">
+      <div class="modal-header">
+        <h2>Emergency Services</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="location-status" id="location-status">
+          <i class="fas fa-spinner fa-spin"></i> Getting your location...
+        </div>
+        
+        <div class="emergency-map" id="emergency-map">
+          <!-- Map will be loaded here -->
+        </div>
+        
+        <div class="nearby-hospitals" id="nearby-hospitals">
+          <h3>Nearby Hospitals</h3>
+          <div class="hospital-list" id="hospital-list">
+            <!-- Hospitals will be loaded here -->
+            <div class="empty-state" id="empty-hospitals">
+              <i class="fas fa-hospital"></i>
+              <p>Loading nearby hospitals...</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="emergency-contacts">
+          <h3>Emergency Contacts</h3>
+          <ul>
+            <li><i class="fas fa-phone"></i> Emergency Hotline: <strong>112</strong></li>
+            <li><i class="fas fa-ambulance"></i> Ambulance Service: <strong>108</strong></li>
+            <li><i class="fas fa-hospital"></i> Medical Helpline: <strong>104</strong></li>
+            <li><i class="fas fa-first-aid"></i> Women Helpline: <strong>1091</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="appointment-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Book an Appointment</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="appointment-form" class="form">
+          <div class="form-group">
+            <label for="specialization">Doctor Specialization</label>
+            <select id="specialization" required>
+              <option value="">Select Specialization</option>
+              <option value="cardiology">Cardiology</option>
+              <option value="dermatology">Dermatology</option>
+              <option value="neurology">Neurology</option>
+              <option value="orthopedics">Orthopedics</option>
+              <option value="pediatrics">Pediatrics</option>
+              <option value="general">General Physician</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hospital">Select Hospital</label>
+            <select id="hospital" required>
+              <option value="">Loading hospitals...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="appointment-date">Preferred Date</label>
+            <input type="date" id="appointment-date" required>
+          </div>
+          <div class="form-group">
+            <label for="appointment-time">Preferred Time</label>
+            <select id="appointment-time" required>
+              <option value="">Select Time</option>
+              <option value="morning">Morning (9AM - 12PM)</option>
+              <option value="afternoon">Afternoon (1PM - 5PM)</option>
+              <option value="evening">Evening (6PM - 9PM)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="appointment-notes">Additional Notes</label>
+            <textarea id="appointment-notes" rows="3"></textarea>
+          </div>
+          <button type="submit" class="primary-btn">Schedule Appointment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Replace the existing medicine-modal content -->
+  <div class="modal" id="medicine-modal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2>Medicine Store</h2>
+              <span class="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+              <div class="medicine-categories">
+                  <button class="category-btn active" data-type="all">All</button>
+                  <button class="category-btn" data-type="prescription">Prescription</button>
+                  <button class="category-btn" data-type="otc">Over-the-counter</button>
+                  <button class="category-btn" data-type="supplement">Supplements</button>
+              </div>
+              <div class="medicine-search">
+                  <input type="text" placeholder="Search medicines..." class="search-input" id="medicine-search">
+                  <button class="search-btn"><i class="fas fa-search"></i></button>
+              </div>
+              <div class="medicine-list" id="medicine-list">
+                  <!-- Medicines will be loaded here -->
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Add Quantity Modal -->
+  <div class="quantity-modal" id="quantity-modal">
+      <h3>Select Quantity</h3>
+      <div class="quantity-input">
+          <button class="decrement-btn" onclick="handleQuantityChange(-1)">-</button>
+          <input type="number" id="quantity-input" value="1" min="1" max="10" readonly>
+          <button class="increment-btn" onclick="handleQuantityChange(1)">+</button>
+      </div>
+      <div class="quantity-actions">
+          <button class="cancel-btn" onclick="closeQuantityModal()">Cancel</button>
+          <button class="confirm-btn" onclick="confirmOrder()">Confirm Order</button>
+      </div>
+  </div>
+  <!-- Replace the existing home-visit-modal with this updated version -->
+  <div class="modal" id="home-visit-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Request Home Doctor Visit</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="doctors-list" id="home-doctors-list">
+          <h3>Available Doctors</h3>
+          <div class="doctors-container" id="doctors-container">
+            <!-- Doctors will be loaded here -->
+            <div class="empty-state" id="empty-doctors">
+              <i class="fas fa-user-md"></i>
+              <p>Loading available doctors...</p>
+            </div>
+          </div>
+        </div>
+        
+        <form id="home-visit-form" class="form">
+          <input type="hidden" id="selected-doctor-id">
+          <div class="form-group">
+            <label for="visit-reason">Reason for Visit</label>
+            <select id="visit-reason" required>
+              <option value="">Select Reason</option>
+              <option value="checkup">Regular Checkup</option>
+              <option value="illness">Illness</option>
+              <option value="injury">Injury</option>
+              <option value="followup">Follow-up Care</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="visit-date">Preferred Date</label>
+            <input type="date" id="visit-date" required>
+          </div>
+          <div class="form-group">
+            <label for="visit-time">Preferred Time</label>
+            <select id="visit-time" required>
+              <option value="">Select Time</option>
+              <option value="morning">Morning (9AM - 12PM)</option>
+              <option value="afternoon">Afternoon (1PM - 5PM)</option>
+              <option value="evening">Evening (6PM - 9PM)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="visit-address">Address</label>
+            <textarea id="visit-address" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="visit-notes">Additional Notes</label>
+            <textarea id="visit-notes" rows="3"></textarea>
+          </div>
+          <button type="submit" class="primary-btn">Request Home Visit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/logout.js"></script>
+</body>
+</html>
