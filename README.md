@@ -26,7 +26,7 @@ HealTrack is a full-stack healthcare platform that allows users to book appointm
 <img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/03b1eb37-1c85-4eca-95cb-3a77bfc982e5" />
 <img width="1895" height="903" alt="image" src="https://github.com/user-attachments/assets/07522926-c49d-499c-acc4-b3a8e1ea1520" />
 <img width="1890" height="908" alt="image" src="https://github.com/user-attachments/assets/ffa8cf97-9560-45d3-b067-a940b4da2dbf" />
-![Uploading image.png…]()
+<img width="1898" height="903" alt="Screenshot 2025-12-06 203318" src="https://github.com/user-attachments/assets/da41fb94-396f-4ebb-9360-2aa3a65e2f03" />
 
 ---
 
